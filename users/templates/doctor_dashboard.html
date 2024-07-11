@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, Dr. {{ user.first_name }}</h2>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Address: {{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</p>
+    <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+</body>
+</html>
