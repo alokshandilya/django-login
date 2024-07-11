@@ -1,14 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Doctor Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .dashboard-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      /* Ensure container wraps around floated elements */
+    }
+
+    .dashboard-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .dashboard-item {
+      margin-bottom: 10px;
+    }
+
+    .dashboard-item label {
+      font-weight: bold;
+    }
+
+    .dashboard-item img {
+      float: right;
+      /* Float the image to the right */
+      max-width: 30%;
+      /* Set a maximum width for responsiveness */
+      border-radius: 50%;
+      /* Make the image circular */
+      margin-left: 20px;
+      /* Add margin for spacing */
+    }
+
+    .dashboard-item .details {
+      overflow: hidden;
+      /* Clear floating elements */
+    }
+  </style>
 </head>
+
 <body>
+  <div class="dashboard-container">
+    <div class="dashboard-item">
+      <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+    </div>
     <h2>Welcome, Dr. {{ user.first_name }}</h2>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Address: {{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</p>
-    <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+    <div class="details">
+      <label><b>First Name:</b></label>
+      <span>{{ user.first_name }}</span>
+    </div>
+    <div class="dashboard-item">
+      <div class="details">
+        <label>Last Name:</label>
+        <span>{{ user.last_name }}</span>
+      </div>
+    </div>
+    <div class="dashboard-item">
+      <div class="details">
+        <label>Email:</label>
+        <span>{{ user.email }}</span>
+      </div>
+    </div>
+    <div class="dashboard-item">
+      <div class="details">
+        <label>Address:</label>
+        <span>{{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</span>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

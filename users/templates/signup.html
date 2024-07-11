@@ -1,14 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Signup</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .signup-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .signup-form label {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .signup-form input[type="text"],
+    .signup-form input[type="password"],
+    .signup-form input[type="email"],
+    .signup-form input[type="file"],
+    .signup-form select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      width: calc(100% - 22px);
+    }
+
+    .signup-form .fieldWrapper {
+      margin-bottom: 15px;
+      /* Adjust margin between fields */
+    }
+
+    .signup-form button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .signup-form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="signup-container">
     <h2>Signup</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Signup</button>
+    <form class="signup-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="fieldWrapper">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {% if form.username.errors %}
+        <span class="error">{{ form.username.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.first_name.label_tag }}
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+        <span class="error">{{ form.first_name.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.last_name.label_tag }}
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+        <span class="error">{{ form.last_name.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {% if form.email.errors %}
+        <span class="error">{{ form.email.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.profile_picture.label_tag }}
+        {{ form.profile_picture }}
+        {% if form.profile_picture.errors %}
+        <span class="error">{{ form.profile_picture.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_line1.label_tag }}
+        {{ form.address_line1 }}
+        {% if form.address_line1.errors %}
+        <span class="error">{{ form.address_line1.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.city.label_tag }}
+        {{ form.city }}
+        {% if form.city.errors %}
+        <span class="error">{{ form.city.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.state.label_tag }}
+        {{ form.state }}
+        {% if form.state.errors %}
+        <span class="error">{{ form.state.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.pincode.label_tag }}
+        {{ form.pincode }}
+        {% if form.pincode.errors %}
+        <span class="error">{{ form.pincode.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.is_patient.label_tag }}
+        {{ form.is_patient }}
+        {% if form.is_patient.errors %}
+        <span class="error">{{ form.is_patient.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper" style="margin-bottom: 20px;">
+        {{ form.is_doctor.label_tag }}
+        {{ form.is_doctor }}
+        {% if form.is_doctor.errors %}
+        <span class="error">{{ form.is_doctor.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+        <span class="error">{{ form.password1.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+        <span class="error">{{ form.password2.errors }}</span>
+        {% endif %}
+      </div>
+      <button type="submit">Signup</button>
     </form>
+  </div>
 </body>
+
 </html>
