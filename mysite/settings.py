@@ -8,7 +8,7 @@ SECRET_KEY = "django-insecure-*pd6l2=ei(+)bn$g@4d#*h36a7i)!^o1u^7jh!_)qjqb)bjm!0
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["django-login-eiu9.onrender.com"]
 
 INSTALLED_APPS = [
     "users",
