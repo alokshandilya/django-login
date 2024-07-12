@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 
-
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
@@ -19,6 +18,11 @@ class CustomUserCreationForm(UserCreationForm):
             "is_patient",
             "is_doctor",
         )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name in self.fields:
+            self.fields[field_name].required = True
 
     def clean(self):
         cleaned_data = super().clean()
