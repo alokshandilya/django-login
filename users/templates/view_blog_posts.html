@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Blog Posts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .blog-list {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .blog-item {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .blog-item h3 {
+      margin-bottom: 5px;
+    }
+
+    .blog-item img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .blog-item .summary {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="blog-list">
+    <h3>Latest Blog Posts</h3>
+    {% if blog_posts %}
+    {% for post in blog_posts %}
+    <div class="blog-item">
+      <h3>{{ post.title }}</h3>
+      <img src="{{ post.image.url }}" alt="Blog Image">
+      <div class="summary">{{ post.summary }}</div>
+      <a href="{% url 'blog_detail' post.id %}">Read more</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No blog posts available.</p>
+    {% endif %}
+  </div>
+</body>
+
+</html>
