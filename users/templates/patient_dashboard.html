@@ -12,6 +12,23 @@
       padding: 20px;
     }
 
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
     .dashboard-container {
       max-width: 800px;
       margin: 0 auto;
@@ -88,6 +105,11 @@
       <p><strong>Address:</strong> {{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</p>
     </div>
 
+    <form id="logout-form" method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn">Logout</button>
+    </form>
+
     <div class="blog-list">
       <h3>Latest Blog Posts:</h3>
       {% if blog_posts %}
@@ -97,7 +119,7 @@
         <hr style="border-width: 2px">
         <img src="{{ post.image.url }}" alt="Blog Image">
         <div class="summary">
-          <p><strong>Summary:</strong><br> {{ post.summary }}</p>
+          <p><strong>Summary:</strong><br> {{ post.summary|truncatewords:15 }}</p>
         </div>
       </div>
       {% endfor %}
