@@ -64,18 +64,14 @@
     }
 
     .blog-list {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
       margin-top: 20px;
-      max-width: 95%;
     }
 
     .blog-item {
-      border: 1px solid #ccc;
+      border: 3px solid #ccc;
       border-radius: 4px;
       padding: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     .blog-item h3 {
@@ -138,7 +134,7 @@
       {% for post in blog_posts %}
       <div class="blog-item">
         <h3>{{ post.title }}</h3>
-        <hr>
+        <hr style="border-width: 2px">
         <img src="{{ post.image.url }}" alt="Blog Image">
         <div class="summary">
           <p><strong>Summary:</strong><br> {{ post.summary }}</p>
