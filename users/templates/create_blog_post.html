@@ -19,7 +19,6 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
     }
 
     .form-container h2 {
@@ -27,33 +26,34 @@
       margin-bottom: 20px;
     }
 
-    .form-item {
-      margin-bottom: 10px;
+    .form {
+      display: flex;
+      flex-direction: column;
     }
 
-    .form-item label {
+    .form label {
       font-weight: bold;
+      margin-bottom: 8px;
     }
 
-    .form-item input[type="text"],
-    .form-item input[type="file"],
-    .form-item textarea {
-      width: 100%;
+    .form input[type="text"],
+    .form input[type="file"],
+    .form textarea,
+    .form select {
       padding: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 16px;
+      width: calc(100% - 22px);
     }
 
-    .form-item textarea {
-      height: 150px;
+    .form .fieldWrapper {
+      margin-bottom: 15px;
+      /* Adjust margin between fields */
     }
 
-    .form-item .draft-checkbox {
-      margin-top: 10px;
-    }
-
-    .form-item button {
+    .form button {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
@@ -63,7 +63,7 @@
       cursor: pointer;
     }
 
-    .form-item button:hover {
+    .form button:hover {
       background-color: #0056b3;
     }
   </style>
@@ -72,33 +72,53 @@
 <body>
   <div class="form-container">
     <h2>Create Blog Post</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form class="form" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <div class="mb-3">
-        <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+      <div class="fieldWrapper">
+        {{ form.title.label_tag }}
         {{ form.title }}
+        {% if form.title.errors %}
+        <span class="error">{{ form.title.errors }}</span>
+        {% endif %}
       </div>
-      <div class="mb-3">
-        <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
+      <div class="fieldWrapper">
+        {{ form.image.label_tag }}
         {{ form.image }}
+        {% if form.image.errors %}
+        <span class="error">{{ form.image.errors }}</span>
+        {% endif %}
       </div>
-      <div class="mb-3">
-        <label for="{{ form.category.id_for_label }}" class="form-label">Category</label>
+      <div class="fieldWrapper">
+        {{ form.category.label_tag }}
         {{ form.category }}
+        {% if form.category.errors %}
+        <span class="error">{{ form.category.errors }}</span>
+        {% endif %}
       </div>
-      <div class="mb-3">
-        <label for="{{ form.summary.id_for_label }}" class="form-label">Summary</label>
+      <div class="fieldWrapper">
+        {{ form.summary.label_tag }}
         {{ form.summary }}
+        {% if form.summary.errors %}
+        <span class="error">{{ form.summary.errors }}</span>
+        {% endif %}
       </div>
-      <div class="mb-3">
-        <label for="{{ form.content.id_for_label }}" class="form-label">Content</label>
+      <div class="fieldWrapper">
+        {{ form.content.label_tag }}
         {{ form.content }}
+        {% if form.content.errors %}
+        <span class="error">{{ form.content.errors }}</span>
+        {% endif %}
       </div>
-      <div class="mb-3 form-check">
+      <div class="fieldWrapper form-check" style="margin-bottom: 20px;">
         {{ form.draft }}
         <label class="form-check-label" for="{{ form.draft.id_for_label }}">Save as Draft</label>
+        {% if form.draft.errors %}
+        <span class="error">{{ form.draft.errors }}</span>
+        {% endif %}
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </div>
 </body>
+
+</html>
