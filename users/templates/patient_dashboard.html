@@ -96,7 +96,9 @@
         <h3>{{ post.title }}</h3>
         <hr style="border-width: 2px">
         <img src="{{ post.image.url }}" alt="Blog Image">
-        <div class="summary">{{ post.summary }}</div>
+        <div class="summary">
+          <p><strong>Summary:</strong><br> {{ post.summary }}</p>
+        </div>
       </div>
       {% endfor %}
       {% else %}
