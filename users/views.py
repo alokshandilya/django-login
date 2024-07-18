@@ -87,6 +87,12 @@ def delete_post(request, post_id):
 
     if request.method == "POST":
         post.delete()
-        return redirect("dashboard")  # Redirect to dashboard after deleting
+        return redirect("dashboard")
 
     return render(request, "delete_post.html", {"post": post})
+
+
+@login_required
+def view_blog_post(request, post_id):
+    blog_post = get_object_or_404(BlogPost, id=post_id)
+    return render(request, "view_blog_post.html", {"blog_post": blog_post})
