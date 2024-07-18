@@ -63,13 +63,6 @@ class BlogPostForm(forms.ModelForm):
         self.fields["content"].widget = forms.Textarea(attrs={"rows": 8})
         self.fields["category"].queryset = BlogCategory.objects.all()
 
-    def clean_summary(self):
-        summary = self.cleaned_data["summary"]
-        words = summary.split()
-        if len(words) > 15:
-            summary = " ".join(words[:15]) + "..."
-        return summary
-
     def clean_category(self):
         category_instance = self.cleaned_data["category"]
         if not category_instance:
