@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Blog Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .delete-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      /* Ensure container wraps around floated elements */
+    }
+
+    .delete-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .delete-item {
+      margin-bottom: 10px;
+    }
+
+    .delete-item label {
+      font-weight: bold;
+    }
+
+    .delete-item img {
+      float: right;
+      /* Float the image to the right */
+      max-width: 30%;
+      /* Set a maximum width for responsiveness */
+      border-radius: 50%;
+      /* Make the image circular */
+      margin-left: 20px;
+      /* Add margin for spacing */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="delete-container">
+    <h2>Delete Blog Post</h2>
+    <div class="delete-item">
+      <h3>{{ post.title }}</h3>
+      <img src="{{ post.image.url }}" alt="Blog Image">
+      <p>{{ post.summary }}</p>
+      <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
