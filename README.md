@@ -30,3 +30,30 @@ Details:
 
 4. There is no specific structure for the dashboards…….can simply display the details entered in the signup form
 ```
+
+# Django Task 2
+
+
+- **Description:** Integrate a blog system within the application created in the previous task. The doctors can upload new blog posts and the patients can view them. 
+
+## Tasks
+
+```
+Details:
+
+1. Create any 4 categories eg. Mental Health, Heart Disease, Covid19, Immunization etc. 
+2. Allow the doctor user to create new blog posts. The upload form should have the following fields:
+   - Title
+   - Image
+   - Category
+   - Summary
+   - Content
+3. The blog writer can mark a blog as a draft, while uploading. 
+4. The doctors can see the posts uploaded by them.
+5. The patient user should see lists of all the blog posts uploaded and not marked as draft, category wise.
+6. Each item in the list should contain 
+   - title of the post 
+   - image of the post
+   - the summary with the world limit to 15. If in case the summary is longer than the given word limit, truncate the summary to 15 words and append ‘...’ at the end.
+```
+
