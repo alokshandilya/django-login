@@ -38,13 +38,25 @@
 
     .delete-item img {
       float: right;
-      /* Float the image to the right */
       max-width: 30%;
-      /* Set a maximum width for responsiveness */
-      border-radius: 50%;
-      /* Make the image circular */
       margin-left: 20px;
-      /* Add margin for spacing */
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -52,13 +64,14 @@
 <body>
   <div class="delete-container">
     <h2>Delete Blog Post</h2>
+    <hr>
     <div class="delete-item">
-      <h3>{{ post.title }}</h3>
       <img src="{{ post.image.url }}" alt="Blog Image">
+      <h3>{{ post.title }}</h3>
       <p>{{ post.summary }}</p>
       <form method="POST">
         {% csrf_token %}
-        <button type="submit">Confirm Delete</button>
+        <button type="submit" class="btn">Confirm Delete</button>
       </form>
     </div>
   </div>
