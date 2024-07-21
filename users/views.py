@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .forms import CustomUserCreationForm, BlogPostForm
-from .models import BlogPost
+from .models import BlogPost, CustomUser
 from django.shortcuts import get_object_or_404
 
 
@@ -39,14 +39,21 @@ def blog_detail(request, post_id):
 
 
 @login_required
+def book_appointment(request, doctor_id):
+    doctor = get_object_or_404(CustomUser, id=doctor_id)
+    return render(request, "book_appointment.html", {"doctor": doctor})
+
+
+@login_required
 def dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_patient:
+            doctors = CustomUser.objects.filter(is_doctor=True)
             blog_posts = BlogPost.objects.filter(draft=False)
             return render(
                 request,
                 "patient_dashboard.html",
-                {"blog_posts": blog_posts},
+                {"doctors": doctors, "blog_posts": blog_posts},
             )
         elif request.user.is_doctor:
             blog_posts = BlogPost.objects.filter(author=request.user)
