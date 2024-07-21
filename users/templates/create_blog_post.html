@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Blog Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form label {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .form input[type="text"],
+    .form input[type="file"],
+    .form textarea,
+    .form select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      width: calc(100% - 22px);
+    }
+
+    .form .fieldWrapper {
+      margin-bottom: 15px;
+      /* Adjust margin between fields */
+    }
+
+    .form button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Create Blog Post</h2>
+    <form class="form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="fieldWrapper">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {% if form.title.errors %}
+        <span class="error">{{ form.title.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+        {% if form.image.errors %}
+        <span class="error">{{ form.image.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.category.label_tag }}
+        {{ form.category }}
+        {% if form.category.errors %}
+        <span class="error">{{ form.category.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.summary.label_tag }}
+        {{ form.summary }}
+        {% if form.summary.errors %}
+        <span class="error">{{ form.summary.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+        {% if form.content.errors %}
+        <span class="error">{{ form.content.errors }}</span>
+        {% endif %}
+      </div>
+      <div class="fieldWrapper form-check" style="margin-bottom: 20px;">
+        {{ form.draft }}
+        <label class="form-check-label" for="{{ form.draft.id_for_label }}">Save as Draft</label>
+        {% if form.draft.errors %}
+        <span class="error">{{ form.draft.errors }}</span>
+        {% endif %}
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>

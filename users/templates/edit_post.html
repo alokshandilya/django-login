@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Blog Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-item {
+      margin-bottom: 20px;
+    }
+
+    .form-item label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-item input[type="text"],
+    .form-item textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .form-item textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .form-item input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-item input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Edit Blog Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-item">
+        <label for="id_title">Title:</label>
+        <input type="text" id="id_title" name="title" value="{{ post.title }}" required>
+      </div>
+      <div class="form-item">
+        <label for="id_image">Image:</label>
+        <input type="file" id="id_image" name="image">
+      </div>
+      <div class="form-item">
+        <label for="id_category">Category:</label>
+        <select id="id_category" name="category" required>
+          {% for category in categories %}
+          <option value="{{ category }}">{{ category }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-item">
+        <label for="id_summary">Summary:</label>
+        <textarea id="id_summary" name="summary" required>{{ post.summary }}</textarea>
+      </div>
+      <div class="form-item">
+        <label for="id_content">Content:</label>
+        <textarea id="id_content" name="content" required>{{ post.content }}</textarea>
+      </div>
+      <div class="form-item">
+        <label for="id_draft">Draft:</label>
+        <input type="checkbox" id="id_draft" name="draft" {% if post.draft %}checked{% endif %}>
+      </div>
+      <div class="form-item">
+        <input type="submit" value="Save Changes">
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
