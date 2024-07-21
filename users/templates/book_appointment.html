@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .appointment-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .appointment-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .appointment-form label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .appointment-form input[type="text"],
+        .appointment-form input[type="date"],
+        .appointment-form input[type="time"],
+        .appointment-form select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: calc(100% - 22px);
+        }
+
+        .appointment-form .fieldWrapper {
+            margin-bottom: 15px;
+        }
+
+        .appointment-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .appointment-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+<div class="appointment-container">
+    <h2>Book Appointment with Dr. {{ doctor.first_name }} {{ doctor.last_name }}</h2>
+    <form class="appointment-form" method="post">
+        {% csrf_token %}
+        <div class="fieldWrapper">
+            <label for="speciality">Required Speciality</label>
+            <select name="speciality" id="speciality" required>
+                <option value="General">General</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Psychiatry">Psychiatry</option>
+            </select>
+        </div>
+        <div class="fieldWrapper">
+            <label for="date">Date of Appointment</label>
+            <input type="date" name="date" id="date" required>
+        </div>
+        <div class="fieldWrapper">
+            <label for="time">Start Time of Appointment</label>
+            <input type="time" name="time" id="time" required>
+        </div>
+        <button type="submit">Confirm</button>
+    </form>
+</div>
+</body>
+
+</html>
