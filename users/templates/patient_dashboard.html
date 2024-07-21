@@ -2,132 +2,162 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      text-decoration: none;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
 
-    .btn:hover {
-      background-color: #0056b3;
-    }
+        .btn:hover {
+            background-color: #0056b3;
+        }
 
-    .dashboard-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
+        .dashboard-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-    .dashboard-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .dashboard-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .blog-list {
-      margin-top: 20px;
-    }
+        .blog-list {
+            margin-top: 20px;
+        }
 
-    .blog-item {
-      border: 3px solid #ccc;
-      border-radius: 4px;
-      padding: 10px;
-      margin-bottom: 20px;
-    }
+        .blog-item {
+            border: 3px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
 
-    .blog-item h3 {
-      margin-bottom: 5px;
-      text-align: center;
-    }
+        .blog-item h3 {
+            margin-bottom: 5px;
+            text-align: center;
+        }
 
-    .blog-item img {
-      display: block;
-      margin: auto;
-      max-width: 30%;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
+        .blog-item img {
+            display: block;
+            margin: auto;
+            max-width: 30%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-    .blog-item .summary {
-      margin-bottom: 10px;
-    }
+        .blog-item .summary {
+            margin-bottom: 10px;
+        }
 
-    .category-section {
-      margin-top: 20px;
-    }
+        .doctor-item {
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .category {
-      margin-bottom: 10px;
-    }
+        .doctor-item img {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-    .category h3 {
-      margin-bottom: 5px;
-    }
+        .category-section {
+            margin-top: 20px;
+        }
 
-    .category .posts {
-      margin-left: 20px;
-    }
-  </style>
+        .category {
+            margin-bottom: 10px;
+        }
+
+        .category h3 {
+            margin-bottom: 5px;
+        }
+
+        .category .posts {
+            margin-left: 20px;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="dashboard-container">
+<div class="dashboard-container">
     {% if user.profile_picture %}
-    <img src="{{ user.profile_picture.url }}" style="float: right; border-radius: 50%; max-width: 200px"
-      alt="Profile Picture">
+        <img src="{{ user.profile_picture.url }}" style="float: right; border-radius: 50%; max-width: 200px"
+             alt="Profile Picture">
     {% endif %}
     <h2>Welcome, {{ user.first_name }} {{ user.last_name }}</h2>
 
     <div class="user-details">
-      <h3>User Details:</h3>
-      <p><strong>Username:</strong> {{ user.username }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Address:</strong> {{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</p>
+        <h3>User Details:</h3>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Address:</strong> {{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</p>
     </div>
 
     <form id="logout-form" method="post" action="{% url 'logout' %}">
-      {% csrf_token %}
-      <button type="submit" class="btn">Logout</button>
+        {% csrf_token %}
+        <button type="submit" class="btn">Logout</button>
     </form>
 
-    <div class="blog-list">
-      <h3>Latest Blog Posts:</h3>
-      {% if blog_posts %}
-      {% for post in blog_posts %}
-      <div class="blog-item">
-        <h3>{{ post.title }}</h3>
-        <hr style="border-width: 2px">
-        <img src="{{ post.image.url }}" alt="Blog Image">
-        <div class="summary">
-          <p><strong>Summary:</strong><br> {{ post.summary|truncatewords:15 }}</p>
-        </div>
-      </div>
-      {% endfor %}
-      {% else %}
-      <p>No blog posts available.</p>
-      {% endif %}
+    <h3>Available Doctors</h3>
+    <div class="doctor-list">
+        {% for doctor in doctors %}
+            <div class="doctor-item">
+                <h3 style="display: inline;">{{ doctor.first_name }} {{ doctor.last_name }}</h3>
+                <img src="{{ doctor.profile_picture.url }}" alt="Profile Picture">
+                <form action="{% url 'book_appointment' doctor.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Book Appointment</button>
+                </form>
+            </div>
+        {% endfor %}
     </div>
-  </div>
+
+
+    <div class="blog-list">
+        <h3>Latest Blog Posts:</h3>
+        {% if blog_posts %}
+            {% for post in blog_posts %}
+                <div class="blog-item">
+                    <h3>{{ post.title }}</h3>
+                    <hr style="border-width: 2px">
+                    <img src="{{ post.image.url }}" alt="Blog Image">
+                    <div class="summary">
+                        <p><strong>Summary:</strong><br> {{ post.summary|truncatewords:15 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No blog posts available.</p>
+        {% endif %}
+    </div>
+</div>
 </body>
 
 </html>
