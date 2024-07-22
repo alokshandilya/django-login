@@ -36,20 +36,13 @@
             margin-bottom: 8px;
         }
 
-        .appointment-form input[type="text"],
-        .appointment-form input[type="date"],
-        .appointment-form input[type="time"],
+        .appointment-form input,
         .appointment-form select {
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
-            width: calc(100% - 22px);
-        }
-
-        .appointment-form .fieldWrapper {
-            margin-bottom: 15px;
         }
 
         .appointment-form button {
@@ -73,24 +66,15 @@
     <h2>Book Appointment with Dr. {{ doctor.first_name }} {{ doctor.last_name }}</h2>
     <form class="appointment-form" method="post">
         {% csrf_token %}
-        <div class="fieldWrapper">
-            <label for="speciality">Required Speciality</label>
-            <select name="speciality" id="speciality" required>
-                <option value="General">General</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Dermatology">Dermatology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Psychiatry">Psychiatry</option>
-            </select>
-        </div>
-        <div class="fieldWrapper">
-            <label for="date">Date of Appointment</label>
-            <input type="date" name="date" id="date" required>
-        </div>
-        <div class="fieldWrapper">
-            <label for="time">Start Time of Appointment</label>
-            <input type="time" name="time" id="time" required>
-        </div>
+        <label for="required_speciality">Required Speciality:</label>
+        <input type="text" id="required_speciality" name="required_speciality" required>
+
+        <label for="appointment_date">Date of Appointment:</label>
+        <input type="date" id="appointment_date" name="appointment_date" required>
+
+        <label for="appointment_start_time">Start Time of Appointment:</label>
+        <input type="time" id="appointment_start_time" name="appointment_start_time" required>
+
         <button type="submit">Confirm</button>
     </form>
 </div>
