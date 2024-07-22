@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .blog-detail-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-detail-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .blog-detail-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .blog-detail-container p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .blog-detail-container .summary {
+            font-style: italic;
+        }
+
+        .blog-detail-container .category {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+<div class="blog-detail-container">
+    <h1>{{ post.title }}</h1>
+    <img src="{{ post.image.url }}" alt="Blog Image">
+    <p class="category">Category: {{ post.category }}</p>
+    <p class="summary"><strong>Summary:</strong> {{ post.summary }}</p>
+    <p>{{ post.content }}</p>
+</div>
+</body>
+
+</html>
