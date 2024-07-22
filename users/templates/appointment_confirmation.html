@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .confirmation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .confirmation-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-details {
+            font-size: 16px;
+        }
+
+        .confirmation-details p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="confirmation-container">
+    <h2>Appointment Confirmation</h2>
+    <div class="confirmation-details">
+        <p><strong>Doctor's Name:</strong> Dr. {{ doctor.first_name }} {{ doctor.last_name }}</p>
+        <p><strong>Appointment Date:</strong> {{ appointment_date }}</p>
+        <p><strong>Appointment Start Time:</strong> {{ appointment_start_time }}</p>
+        <p><strong>Appointment End Time:</strong> {{ appointment_end_time }}</p>
+    </div>
+</div>
+</body>
+
+</html>
