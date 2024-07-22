@@ -2,183 +2,209 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
 
-    .dashboard-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
+        .dashboard-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-    .dashboard-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .dashboard-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .dashboard-item {
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
+        .dashboard-item {
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
 
-    .dashboard-item label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 10px;
-    }
+        .dashboard-item label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
 
-    .dashboard-item img {
-      float: right;
-      max-width: 150px;
-      border-radius: 50%;
-      margin-left: 20px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
+        .dashboard-item img {
+            float: right;
+            max-width: 150px;
+            border-radius: 50%;
+            margin-left: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      text-decoration: none;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
 
-    .btn:hover {
-      background-color: #0056b3;
-    }
+        .btn:hover {
+            background-color: #0056b3;
+        }
 
-    .blog-list {
-      margin-top: 20px;
-    }
+        .blog-list {
+            margin-top: 20px;
+        }
 
-    .blog-item {
-      border: 3px solid #ccc;
-      border-radius: 4px;
-      padding: 10px;
-      margin-bottom: 20px;
-    }
+        .blog-item {
+            border: 3px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
 
-    .blog-item h3 {
-      margin-bottom: 5px;
-      text-align: center;
-    }
+        .blog-item h3 {
+            margin-bottom: 5px;
+            text-align: center;
+        }
 
-    .blog-item img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 40%;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
+        .blog-item img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 40%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-    .blog-item .summary {
-      margin-bottom: 10px;
-    }
+        .blog-item .summary {
+            margin-bottom: 10px;
+        }
 
-    .blog-item a {
-      display: inline-block;
-      margin-top: 10px;
-      text-decoration: none;
-      color: #007bff;
-      margin-right: 10px;
-    }
+        .blog-item a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
 
-    .blog-item a:hover {
-      text-decoration: underline;
-    }
-  </style>
+        .blog-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="dashboard-container">
+<div class="dashboard-container">
     <h2>Welcome, Dr. {{ user.first_name }}</h2>
 
     <div class="dashboard-item">
-      <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
-      <div class="details" style="margin-bottom: 15px">
-        <label>First Name:</label>
-        <span>{{ user.first_name }}</span>
-      </div>
-      <div class="details" style="margin-bottom: 15px">
-        <label>Last Name:</label>
-        <span>{{ user.last_name }}</span>
-      </div>
-      <div class="details" style="margin-botton: 15px">
-        <label>Email:</label>
-        <span>{{ user.email }}</span>
-      </div>
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+        <div class="details" style="margin-bottom: 15px">
+            <label>First Name:</label>
+            <span>{{ user.first_name }}</span>
+        </div>
+        <div class="details" style="margin-bottom: 15px">
+            <label>Last Name:</label>
+            <span>{{ user.last_name }}</span>
+        </div>
+        <div class="details" style="margin-botton: 15px">
+            <label>Email:</label>
+            <span>{{ user.email }}</span>
+        </div>
     </div>
 
     <a href="{% url 'create_blog_post' %}" class="btn">Create New Blog Post</a>
     <form id="logout-form" method="post" action="{% url 'logout' %}">
-      {% csrf_token %}
-      <button type="submit" class="btn">Logout</button>
+        {% csrf_token %}
+        <button type="submit" class="btn">Logout</button>
     </form>
 
-    <div class="blog-list">
-      <h3>Your Blog Posts</h3>
-      {% if blog_posts %}
-      {% for post in blog_posts %}
-      <div class="blog-item">
-        <h3>{{ post.title }}</h3>
-        <hr style="border-width: 2px">
-        <img src="{{ post.image.url }}" alt="Blog Image">
-        <div class="summary">
-          <p><strong>Summary:</strong><br> {{ post.summary|truncatewords:15 }}</p>
-          <a href="{% url 'view_blog_post' post.id %}" class="btn" style="color: #fff">View</a>
-        </div>
-        <div class="category">
-          <p><strong>Category:</strong> {{ post.category }}</p>
-        </div>
-        <a href="{% url 'edit_post' post.id %}">Edit</a>|
-        <a href="{% url 'delete_post' post.id %}">Delete</a>
-      </div>
-      {% endfor %}
-      {% else %}
-      <p>No blog posts created yet.</p>
-      {% endif %}
+    <div class="appointments-section">
+        <a href="https://calendar.google.com/calendar" target="_blank" class="btn"
+           style="color: #fff; margin-bottom: 10px;">Check Appointments on Google Calendar</a>
+        <h2>Your Appointments</h2>
+        {% if appointments %}
+            <table>
+                <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Speciality</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.patient.get_full_name }}</td>
+                        <td>{{ appointment.speciality }}</td>
+                        <td>{{ appointment.start_time }}</td>
+                        <td>{{ appointment.end_time }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No appointments scheduled.</p>
+        {% endif %}
     </div>
 
-
-
-
+    <div class="blog-list">
+        <h3>Your Blog Posts</h3>
+        {% if blog_posts %}
+            {% for post in blog_posts %}
+                <div class="blog-item">
+                    <h3>{{ post.title }}</h3>
+                    <hr style="border-width: 2px">
+                    <img src="{{ post.image.url }}" alt="Blog Image">
+                    <div class="summary">
+                        <p><strong>Summary:</strong><br> {{ post.summary|truncatewords:15 }}</p>
+                        <a href="{% url 'view_blog_post' post.id %}" class="btn" style="color: #fff">View</a>
+                    </div>
+                    <div class="category">
+                        <p><strong>Category:</strong> {{ post.category }}</p>
+                    </div>
+                    <a href="{% url 'edit_post' post.id %}">Edit</a>|
+                    <a href="{% url 'delete_post' post.id %}">Delete</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No blog posts created yet.</p>
+        {% endif %}
+    </div>
 
 
     <!--   <div class="blog-list"> -->
     <!--     <h3>Your Blog Posts</h3> -->
     <!--     {% if blog_posts %} -->
-    <!--     {% for post in blog_posts %} -->
-    <!--     <div class="blog-item"> -->
-    <!--       <h3>{{ post.title }}</h3> -->
-    <!--       <hr style="border-width: 2px"> -->
-    <!--       <img src="{{ post.image.url }}" alt="Blog Image"> -->
-    <!--       <div class="summary"> -->
-    <!--         <p><strong>Summary:</strong><br> {{ post.summary }}</p> -->
-    <!--       </div> -->
-    <!--       <a href="{% url 'edit_post' post.id %}">Edit</a> | -->
-    <!--       <a href="{% url 'delete_post' post.id %}">Delete</a> -->
-    <!--     </div> -->
-    <!--     {% endfor %} -->
-    <!--     {% else %} -->
-    <!--     <p>No blog posts created yet.</p> -->
-    <!--     {% endif %} -->
+        <!--     {% for post in blog_posts %} -->
+            <!--     <div class="blog-item"> -->
+            <!--       <h3>{{ post.title }}</h3> -->
+            <!--       <hr style="border-width: 2px"> -->
+            <!--       <img src="{{ post.image.url }}" alt="Blog Image"> -->
+            <!--       <div class="summary"> -->
+            <!--         <p><strong>Summary:</strong><br> {{ post.summary }}</p> -->
+            <!--       </div> -->
+            <!--       <a href="{% url 'edit_post' post.id %}">Edit</a> | -->
+            <!--       <a href="{% url 'delete_post' post.id %}">Delete</a> -->
+            <!--     </div> -->
+            <!--     {% endfor %} -->
+        <!--     {% else %} -->
+        <!--     <p>No blog posts created yet.</p> -->
+        <!--     {% endif %} -->
     <!--   </div> -->
     <!-- </div> -->
 </body>
