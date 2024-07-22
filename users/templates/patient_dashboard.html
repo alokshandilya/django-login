@@ -78,7 +78,7 @@
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .appointment-list table {
             border-radius: 4px;
             width: 100%;
@@ -86,7 +86,7 @@
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        
+
 
         .doctor-item img {
             height: 200px;
@@ -171,10 +171,7 @@
             <div class="doctor-item">
                 <h3 style="display: inline;">{{ doctor.first_name }} {{ doctor.last_name }}</h3>
                 <img src="{{ doctor.profile_picture.url }}" alt="Profile Picture">
-                <form action="{% url 'book_appointment' doctor.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Book Appointment</button>
-                </form>
+                <a href="{% url 'book_appointment' doctor.id %}" class="btn btn-primary">Book Appointment</a>
             </div>
         {% endfor %}
     </div>
