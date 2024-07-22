@@ -40,10 +40,11 @@
 <div class="confirmation-container">
     <h2>Appointment Confirmation</h2>
     <div class="confirmation-details">
-        <p><strong>Doctor's Name:</strong> Dr. {{ doctor.first_name }} {{ doctor.last_name }}</p>
-        <p><strong>Appointment Date:</strong> {{ appointment_date }}</p>
-        <p><strong>Appointment Start Time:</strong> {{ appointment_start_time }}</p>
-        <p><strong>Appointment End Time:</strong> {{ appointment_end_time }}</p>
+        <p>Doctor's Name: {{ appointment.doctor.get_full_name }}</p>
+        <p>Appointment Date: {{ appointment.start_time.date }}</p>
+        <p>Start Time: {{ appointment.start_time.time }}</p>
+        <p>End Time: {{ appointment.end_time.time }}</p>
+        <p><a href="{{ calendar_event_link }}" target="_blank">View Event on Google Calendar</a></p>
     </div>
 </div>
 </body>
