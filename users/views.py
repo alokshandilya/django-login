@@ -42,38 +42,31 @@ def blog_detail(request, post_id):
 
 @login_required
 def book_appointment(request, doctor_id):
-    doctor = get_object_or_404(CustomUser, id=doctor_id, is_doctor=True)
+    doctor = get_object_or_404(CustomUser, id=doctor_id)
+    if request.method == 'POST':
+        speciality = request.POST.get('speciality')
+        date = request.POST.get('date')
+        start_time = request.POST.get('start_time')
 
-    if request.method == "POST":
-        required_speciality = request.POST.get("required_speciality")
-        appointment_date = request.POST.get("appointment_date")
-        appointment_start_time = request.POST.get("appointment_start_time")
+        # Combine date and start_time to create a datetime object
+        start_datetime_str = f"{date} {start_time}"
+        start_datetime = datetime.strptime(start_datetime_str, '%Y-%m-%d %H:%M')
 
-        # Parse date and time
-        try:
-            appointment_start = datetime.strptime(f"{appointment_date} {appointment_start_time}", "%Y-%m-%d %H:%M")
-        except ValueError:
-            return HttpResponseBadRequest("Invalid date or time format")
+        # Calculate end time
+        end_datetime = start_datetime + timedelta(minutes=45)
 
-        appointment_end = appointment_start + timedelta(minutes=45)
-
-        # Create the appointment
-        Appointment.objects.create(
-            patient=request.user,
+        # Create appointment
+        appointment = Appointment(
             doctor=doctor,
-            speciality=required_speciality,
-            start_time=appointment_start,
-            end_time=appointment_end
+            patient=request.user,
+            speciality=speciality,
+            start_time=start_datetime,
+            end_time=end_datetime,
         )
+        appointment.save()
+        return render(request, 'appointment_confirmation.html', {'appointment': appointment})
 
-        return render(request, "appointment_confirmation.html", {
-            "doctor": doctor,
-            "appointment_date": appointment_start.date(),
-            "appointment_start_time": appointment_start.time(),
-            "appointment_end_time": appointment_end.time()
-        })
-
-    return render(request, "book_appointment.html", {"doctor": doctor})
+    return render(request, 'book_appointment.html', {'doctor': doctor})
 
 
 @login_required
