@@ -64,16 +64,16 @@
 <body>
 <div class="appointment-container">
     <h2>Book Appointment with Dr. {{ doctor.first_name }} {{ doctor.last_name }}</h2>
-    <form class="appointment-form" method="post">
+    <form method="POST">
         {% csrf_token %}
-        <label for="required_speciality">Required Speciality:</label>
-        <input type="text" id="required_speciality" name="required_speciality" required>
+        <label for="speciality">Required Speciality:</label>
+        <input type="text" id="speciality" name="speciality" required><br><br>
 
-        <label for="appointment_date">Date of Appointment:</label>
-        <input type="date" id="appointment_date" name="appointment_date" required>
+        <label for="date">Date of Appointment:</label>
+        <input type="date" id="date" name="date" required><br><br>
 
-        <label for="appointment_start_time">Start Time of Appointment:</label>
-        <input type="time" id="appointment_start_time" name="appointment_start_time" required>
+        <label for="start_time">Start Time of Appointment:</label>
+        <input type="time" id="start_time" name="start_time" required><br><br>
 
         <button type="submit">Confirm</button>
     </form>
