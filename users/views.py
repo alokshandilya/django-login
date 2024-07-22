@@ -4,8 +4,14 @@ from django.contrib.auth import login
 from .forms import CustomUserCreationForm, BlogPostForm
 from .models import BlogPost, CustomUser, Appointment
 from django.shortcuts import get_object_or_404
-from datetime import timedelta, datetime
-from django.http import HttpResponseBadRequest
+from datetime import datetime, timedelta
+from django.utils import timezone
+from google_calendar import create_calendar_event
+from django.conf import settings
+from django.urls import reverse
+from google_auth_oauthlib.flow import Flow
+from google.oauth2.credentials import Credentials
+import os
 
 
 def signup(request):
@@ -40,33 +46,65 @@ def blog_detail(request, post_id):
     return render(request, "blog_detail.html", {"post": post})
 
 
+def google_oauth2_callback(request):
+    credentials_file = os.path.join(settings.BASE_DIR, 'credentials.json')
+
+    flow = Flow.from_client_secrets_file(
+        credentials_file,
+        scopes=['https://www.googleapis.com/auth/calendar'],
+        redirect_uri=request.build_absolute_uri(reverse('google_oauth2_callback'))
+    )
+
+    authorization_response = request.build_absolute_uri()
+    flow.fetch_token(authorization_response=authorization_response)
+
+    credentials = flow.credentials
+    with open('token.json', 'w') as token:
+        token.write(credentials.to_json())
+
+    return redirect('dashboard')
+
+
 @login_required
 def book_appointment(request, doctor_id):
     doctor = get_object_or_404(CustomUser, id=doctor_id)
-    if request.method == 'POST':
-        speciality = request.POST.get('speciality')
-        date = request.POST.get('date')
-        start_time = request.POST.get('start_time')
 
-        # Combine date and start_time to create a datetime object
-        start_datetime_str = f"{date} {start_time}"
-        start_datetime = datetime.strptime(start_datetime_str, '%Y-%m-%d %H:%M')
+    if request.method == "POST":
+        required_speciality = request.POST.get("speciality")
+        date_str = request.POST.get("date")
+        start_time_str = request.POST.get("start_time")
 
-        # Calculate end time
-        end_datetime = start_datetime + timedelta(minutes=45)
+        # Combine date and time into a single datetime object
+        appointment_start = timezone.make_aware(
+            datetime.strptime(f"{date_str} {start_time_str}", '%Y-%m-%d %H:%M')
+        )
+        appointment_end = appointment_start + timedelta(minutes=45)
 
-        # Create appointment
-        appointment = Appointment(
+        # Create the appointment
+        appointment = Appointment.objects.create(
             doctor=doctor,
             patient=request.user,
-            speciality=speciality,
-            start_time=start_datetime,
-            end_time=end_datetime,
+            speciality=required_speciality,
+            start_time=appointment_start,
+            end_time=appointment_end
         )
-        appointment.save()
-        return render(request, 'appointment_confirmation.html', {'appointment': appointment})
 
-    return render(request, 'book_appointment.html', {'doctor': doctor})
+        # Create calendar event and get the event link
+        calendar_event_link = create_calendar_event(
+            start_time=appointment_start,
+            end_time=appointment_end,
+            summary=f"Appointment with Dr. {doctor.get_full_name()}",
+            description=f"Speciality: {required_speciality}",
+            location="django-login clinic, New Delhi",
+            doctor_email=doctor.email
+        )
+
+        return render(request, "appointment_confirmation.html", {
+            "appointment": appointment,
+            "calendar_event_link": calendar_event_link
+        })
+
+    return render(request, "book_appointment.html", {"doctor": doctor})
 
 
 @login_required
@@ -105,7 +143,8 @@ def dashboard(request):
             )
         elif request.user.is_doctor:
             blog_posts = BlogPost.objects.filter(author=request.user)
-            return render(request, "doctor_dashboard.html", {"blog_posts": blog_posts})
+            appointments = Appointment.objects.filter(doctor=request.user)
+            return render(request, "doctor_dashboard.html", {"blog_posts": blog_posts, "appointments": appointments})
     return redirect("login")
 
 
