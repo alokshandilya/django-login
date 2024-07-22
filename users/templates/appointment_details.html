@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .details-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .details-container p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+<div class="details-container">
+    <h2>Appointment Confirmed</h2>
+    <p><strong>Doctor's Name:</strong> Dr. {{ doctor.first_name }} {{ doctor.last_name }}</p>
+    <p><strong>Speciality:</strong> {{ speciality }}</p>
+    <p><strong>Appointment Date:</strong> {{ date }}</p>
+    <p><strong>Appointment Start Time:</strong> {{ start_time }}</p>
+    <p><strong>Appointment End Time:</strong> {{ end_time }}</p>
+</div>
+</body>
+
+</html>
