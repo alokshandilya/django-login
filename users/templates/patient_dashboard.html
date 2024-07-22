@@ -78,6 +78,15 @@
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        
+        .appointment-list table {
+            border-radius: 4px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
 
         .doctor-item img {
             height: 200px;
@@ -124,6 +133,37 @@
         {% csrf_token %}
         <button type="submit" class="btn">Logout</button>
     </form>
+
+    <div class="appointment-list">
+        <h3>Your Appointments</h3>
+        {% if appointments %}
+            <table>
+                <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Speciality</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
+                        <td>{{ appointment.speciality }}</td>
+                        <td>{{ appointment.start_time|date:"Y-m-d" }}</td>
+                        <td>{{ appointment.start_time|date:"H:i" }}</td>
+                        <td>{{ appointment.end_time|date:"H:i" }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No appointments scheduled.</p>
+        {% endif %}
+    </div>
+
 
     <h3>Available Doctors</h3>
     <div class="doctor-list">
