@@ -57,3 +57,36 @@ Details:
    - the summary with the world limit to 15. If in case the summary is longer than the given word limit, truncate the summary to 15 words and append ‘...’ at the end.
 ```
 
+# Django Task 3
+
+- **Description:** Integrate an appointment booking system within the application created in the previous tasks. The patient can book an appointment with the doctor.
+
+## Tasks
+
+```
+Details:
+
+    The patient user should be able to see a list of all the doctors in the system
+    Each list item should have:
+        Profile picture
+        Name
+        A button “Book Appointment”
+    Upon clicking that button the patient user should see a form with following:
+        Required speciality
+        Date of Appointment
+        Start Time of Appointment
+        A confirm button
+    Each appointment will be of 45 mins
+    When user clicks on confirm a calendar event has to be created for the doctor user
+    On confirmation the patient should see a screen with the appointment details:
+        Doctors Name
+        Appointment date
+        Appointment start time
+        Appointment end time(to be calculated by the application)
+
+ 
+
+Technical requirement:
+
+    Use Google’s calendar API for creating calendar events
+```
